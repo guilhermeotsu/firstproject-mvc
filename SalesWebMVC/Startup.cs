@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMVC.Models;
 using SalesWebMVC.Data;
+using SalesWebMVC.Services;
 
 namespace SalesWebMVC
 {
@@ -41,8 +42,9 @@ namespace SalesWebMVC
                    options.UseMySql(Configuration.GetConnectionString("SalesWebMVCContext"), builder =>
                         builder.MigrationsAssembly("SalesWebMVC")));
 
-            //registro no sistema de injeçao de dependecia da aplicaçao, isso permite que meu serviço pode ser injetado em outros e tambem receba os serviços injetados nele
+            //registro no sistema de injeçao de dependecia da aplicaçao, isso permite que o serviço pode ser injetado em outros e tambem receba os serviços injetados de outras classes
             services.AddScoped<SeedingService>();
+            services.AddScoped<SellerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +53,7 @@ namespace SalesWebMVC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //Caso esteja no perfil de desenvolvedor e a Base nao estiver popular o seedingService vai popula-la
+                //Caso esteja no perfil de desenvolvedor e a Base nao estiver populada o seedingService vai popular o db
                 seedingService.Seed();
             }
             else
