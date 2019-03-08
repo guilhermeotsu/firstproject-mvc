@@ -16,7 +16,7 @@ namespace SalesWebMVC.Services
         {
             _context = context;
         }
-
+        
         //Operaçao para retornar todos os vendedores do db em uma lista
         public List<Seller> FindAll()
         {
