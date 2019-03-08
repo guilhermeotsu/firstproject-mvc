@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace SalesWebMVC.Models
@@ -9,10 +10,19 @@ namespace SalesWebMVC.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+
+        [Display(Name="Base Salary")]
         public double BaseSalary { get; set; }
+
+        [Display(Name="Birth Date")]
         public DateTime BirthDate { get; set; }
+
         //Fazendo a associaçao do Seller com o Department (cada vendedor possuir um departamento)
         public Department Department { get; set; }
+
+        //Esse atributo faz a integridade referencial dos cadastros de Sellers (Chave estrangeira nao pode ser nulao int é um strunct e nao pode ser nulo)
+        public int DepartmentId { get; set; }
+
         //Fazendo a associaçao do Seller com o SalesRecord (cada vendedor tem varios registros de venda)
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
 
