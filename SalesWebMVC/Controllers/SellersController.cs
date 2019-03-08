@@ -44,5 +44,32 @@ namespace SalesWebMVC.Controllers
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
+
+        //Ação para confirmação do Delete, o "?" indica que o parametro é opcional
+        public IActionResult Delete (int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            //Implementou o Value pois o valor do parametro é opcional
+            var obj = _sellerService.FindById(id.Value);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        //Uma ação POST para realmente deletar o Seller
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _sellerService.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
