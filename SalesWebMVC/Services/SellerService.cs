@@ -1,4 +1,5 @@
-﻿using SalesWebMVC.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SalesWebMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +33,8 @@ namespace SalesWebMVC.Services
         }
 
         public Seller FindById(int id)
-        {//vai retornar o vendedor que possui o id do parametro se n exitir retorna nulo
-            return _context.Seller.FirstOrDefault(obj => obj.Id == id);
+        {//vai retornar o vendedor que possui o id do parametro se n exitir retorna nulo o Include é um Eager Loading
+            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove(int id)
