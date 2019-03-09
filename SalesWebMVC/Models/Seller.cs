@@ -21,6 +21,7 @@ namespace SalesWebMVC.Models
         public Department Department { get; set; }
 
         //Esse atributo faz a integridade referencial dos cadastros de Sellers (Chave estrangeira nao pode ser nulao int é um strunct e nao pode ser nulo)
+        [Display(Name="Departmanet")]
         public int DepartmentId { get; set; }
 
         //Fazendo a associaçao do Seller com o SalesRecord (cada vendedor tem varios registros de venda)
