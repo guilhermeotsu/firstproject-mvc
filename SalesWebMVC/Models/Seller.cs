@@ -13,10 +13,10 @@ namespace SalesWebMVC.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Display(Name="Base Salary"), DisplayFormat(DataFormatString = "{0:F2}")]
+        [Display(Name="Base Salary"), DisplayFormat(DataFormatString = "{0:F2}"]
         public double BaseSalary { get; set; }
 
-        [Display(Name="Birth Date"), DataType(DataType.Date), DisplayFormat(DataFormatString = " {0:dd/MM/yyyy}")]
+        [Display(Name="Birth Date"), DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
         //Fazendo a associaçao do Seller com o Department (cada vendedor possuir um departamento)
