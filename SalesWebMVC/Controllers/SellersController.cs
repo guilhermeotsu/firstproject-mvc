@@ -26,7 +26,7 @@ namespace SalesWebMVC.Controllers
         public async Task<IActionResult> Index()
         {
             //Chamou o Controller, que por sua vez acessou o Model, pegou o dado na lista e encaminhou esses dados para a View
-            var list = _sellerService.FindAllAsync();
+            var list = await _sellerService.FindAllAsync();
             return View(list);
         }
 
@@ -78,8 +78,14 @@ namespace SalesWebMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-           await  _sellerService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _sellerService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         //Criando uma ação details
